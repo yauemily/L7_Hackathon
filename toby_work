@@ -1,1 +1,83 @@
+#### PACKAGES
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import sklearn
+from sklearn.preprocessing import OneHotEncoder
+
+
+#### GET DATA
+
+df = pd.read_csv('data/corona_tested_individuals_ver_006.english.csv', dtype={'age_60_and_above': str})
+df['test_date'] = pd.to_datetime(df['test_date'])
+df.head()
+
+#### Exploratory Data Analysis
+
+df.isna().sum()
+
+for column in df.columns:
+    plt.figure(figsize=(8, 6))
+    sns.countplot(x=column, data=df)
+    plt.title(f'Countplot for {column}')
+    plt.show()
+
+
+## There are models to consider. 
+## We could use ensembles to determine feature importance.
+## There is a time variable, so time series is on the cards.
+## How we handle nulls matters, can help determine them.
+## For simplicity, we can stick to a smaller dataset focusing on the numerics.
+## Could explore a clustering analysis. 
+
+
+#### First Attempt - Drop Nulls, Numerics Only
+
+df2 = df.copy()
+df2 = df2[['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache', 'corona_result']]
+df2 = df2.dropna()
+df2.isna().sum()
+
+## Make target numeric
+
+df2['corona_result'] = df2['corona_result'].replace({'positive': 1, 'negative': 0})
+df2 = df2[df2['corona_result'] != 'other']
+
+## Model
+
+from sklearn.ensemble import RandomForestClassifier as RFC
+
+X = df2[['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache']]
+y = df2['corona_result']
+y = y.astype(int)
+
+model1 = RFC()
+model1.fit(X, y)
+
+# Get feature importances and visualise
+importances = model1.feature_importances_
+feature_names = X.columns
+
+importance_df = pd.DataFrame({
+    'Feature': feature_names,
+    'Importance': importances
+}).sort_values(by='Importance', ascending=False)
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Importance', y='Feature', data=importance_df)
+plt.title('Feature Importance')
+plt.show()
+
+#### Second Attempt - Encode Categoricals to Deal with Nulls
+
+df3 = df.copy()
+categs = ['age_60_and_above', 'gender', 'test_indication']
+
+encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+
+enc_data = encoder.fit_transform(df3[['age_60_and_above', 'gender', 'test_indication']])
+enc_df = pd.DataFrame(enc_data, columns.get_feature_names_out(df3[['age_60_and_above', 'gender', 'test_indication']]))
+
+df4 = pd.concat([df3, enc_df], axis=1).drop(df3[['age_60_and_above', 'gender', 'test_indication']], axis=1)
