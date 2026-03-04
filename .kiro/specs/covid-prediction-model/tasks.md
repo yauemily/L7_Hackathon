@@ -88,7 +88,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement training pipeline
-  - [-] 6.1 Create `training.py` with `TrainingPipeline` class
+  - [x] 6.1 Create `training.py` with `TrainingPipeline` class
     - Implement `compute_class_weights()` to calculate weights for imbalanced classes
     - Implement `train()` method supporting logistic regression, random forest, and gradient boosting
     - Apply class balancing using class_weight parameter or SMOTE
@@ -119,7 +119,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 3.1, 3.2, 3.5, 8.1, 10.1, 10.2_
 
 - [ ] 7. Implement model persistence
-  - [ ] 7.1 Create `model_io.py` with save/load functions
+  - [x] 7.1 Create `model_io.py` with save/load functions
     - Implement `save_model()` to save model with metadata and feature engineer using joblib
     - Include timestamp in filename
     - Implement `load_model()` to load model and metadata from file
@@ -144,7 +144,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 7.1, 7.2, 7.3, 7.5_
 
 - [ ] 8. Implement model evaluator
-  - [ ] 8.1 Create `evaluation.py` with `ModelEvaluator` class
+  - [-] 8.1 Create `evaluation.py` with `ModelEvaluator` class
     - Implement `compute_metrics()` to calculate accuracy, precision, recall, F1-score, AUC-ROC
     - Implement `generate_confusion_matrix()` using sklearn.metrics.confusion_matrix
     - Implement `evaluate()` to orchestrate evaluation and return complete report
