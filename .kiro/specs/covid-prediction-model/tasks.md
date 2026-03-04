@@ -224,7 +224,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 5.1, 5.2, 5.5, 6.1, 6.2, 6.3, 6.4, 6.5_
 
 - [ ] 12. Create data models and schemas
-  - [-] 12.1 Create `models.py` with dataclass definitions
+  - [x] 12.1 Create `models.py` with dataclass definitions
     - Define `FeatureVector` dataclass with all input features
     - Define `PredictionResult` dataclass with predicted_class, confidence, timestamp
     - Define `TrainingMetadata` dataclass with all training metadata fields
@@ -239,7 +239,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 5.1, 5.3, 5.4_
 
 - [ ] 13. Create end-to-end integration script
-  - [ ] 13.1 Create `main.py` with complete training and prediction workflow
+  - [x] 13.1 Create `main.py` with complete training and prediction workflow
     - Load dataset using CovidDatasetLoader
     - Preprocess data using CovidDataPreprocessor
     - Apply feature engineering using FeatureEngineer
@@ -258,7 +258,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - Test all three algorithms end-to-end
     - _Requirements: All (integration)_
 
-- [ ] 14. Final checkpoint - Run all tests and validate complete system
+- [x] 14. Final checkpoint - Run all tests and validate complete system
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

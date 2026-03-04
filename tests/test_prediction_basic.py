@@ -4,7 +4,8 @@ Basic tests for prediction service to verify implementation.
 
 import pytest
 import numpy as np
-from covid_prediction.prediction import PredictionService, PredictionResult
+from covid_prediction.prediction import PredictionService
+from covid_prediction.models import PredictionResult
 
 
 def test_prediction_result_dataclass():

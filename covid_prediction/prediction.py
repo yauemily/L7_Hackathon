@@ -6,19 +6,11 @@ on new data with comprehensive input validation.
 """
 
 from typing import Dict, Any, Optional
-from dataclasses import dataclass
 from datetime import datetime
 import numpy as np
 from covid_prediction.model_io import load_model, verify_model_compatibility
 from covid_prediction.preprocessor import CovidDataPreprocessor
-
-
-@dataclass
-class PredictionResult:
-    """Output from prediction service."""
-    predicted_class: str  # 'positive' or 'negative'
-    confidence: float  # Probability between 0.0 and 1.0
-    timestamp: str  # ISO format timestamp
+from covid_prediction.models import PredictionResult
 
 
 class PredictionService:
