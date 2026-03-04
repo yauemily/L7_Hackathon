@@ -19,6 +19,8 @@ Workflow:
 
 import os
 import sys
+import json
+import logging
 from datetime import datetime
 
 # Import all required modules
@@ -64,8 +66,40 @@ def print_metrics(metrics: dict, algorithm: str):
 
 def main():
     """Main execution function."""
+    # Setup logging
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = f"reports/training_log_{timestamp}.txt"
+    
+    # Create reports directory
+    os.makedirs("reports", exist_ok=True)
+    
+    # Configure logging to both file and console
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file, mode='w'),
+            logging.StreamHandler(sys.stdout)
+        ],
+        force=True  # Force reconfiguration if already configured
+    )
+    
+    logger = logging.getLogger(__name__)
+    
+    # Ensure handlers are properly set
+    if not logger.handlers:
+        logger.addHandler(logging.FileHandler(log_file, mode='w'))
+        logger.addHandler(logging.StreamHandler(sys.stdout))
+    
+    logger.info("=" * 80)
+    logger.info("  COVID-19 PREDICTION MODEL - END-TO-END WORKFLOW")
+    logger.info("=" * 80)
+    logger.info(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    logger.info(f"Log file: {log_file}")
+    
     print_section_header("COVID-19 PREDICTION MODEL - END-TO-END WORKFLOW")
     print(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Log file: {log_file}")
     
     # Configuration
     dataset_path = "Data/corona_tested_individuals_ver_006.english.csv"
@@ -75,6 +109,13 @@ def main():
     # Create output directories
     os.makedirs(models_dir, exist_ok=True)
     os.makedirs(reports_dir, exist_ok=True)
+    
+    # Dictionary to store all results for JSON export
+    results_summary = {
+        'timestamp': timestamp,
+        'dataset': dataset_path,
+        'models': {}
+    }
     
     # =========================================================================
     # STEP 1: Load Dataset
@@ -212,6 +253,32 @@ def main():
             'metrics': metrics,
             'feature_engineer': feature_engineer
         }
+        
+        # Save metrics to results summary (convert numpy arrays to lists for JSON)
+        results_summary['models'][algorithm] = {
+            'model_path': model_path,
+            'accuracy': float(metrics['accuracy']),
+            'auc_roc': float(metrics['auc_roc']),
+            'precision_positive': float(metrics['precision_positive']),
+            'precision_negative': float(metrics['precision_negative']),
+            'recall_positive': float(metrics['recall_positive']),
+            'recall_negative': float(metrics['recall_negative']),
+            'f1_positive': float(metrics['f1_positive']),
+            'f1_negative': float(metrics['f1_negative']),
+            'confusion_matrix': metrics['confusion_matrix'].tolist(),
+            'class_distribution': metrics['class_distribution'],
+            'class_balance_method': pipeline.metadata.get('class_balance_method', 'None'),
+            'feature_engineering_applied': (algorithm == 'logistic_regression'),
+            'original_feature_count': len(feature_names),
+            'engineered_feature_count': len(engineered_feature_names)
+        }
+        
+        # Log metrics to file
+        logger.info(f"\n{algorithm.upper()} - Evaluation Metrics:")
+        logger.info(f"  Accuracy: {metrics['accuracy']:.4f}")
+        logger.info(f"  AUC-ROC: {metrics['auc_roc']:.4f}")
+        logger.info(f"  F1-Score (Positive): {metrics['f1_positive']:.4f}")
+        logger.info(f"  F1-Score (Negative): {metrics['f1_negative']:.4f}")
     
     # =========================================================================
     # STEP 8: Load Model and Make Sample Predictions
@@ -316,8 +383,25 @@ def main():
     print(f"Best Model: {best_auc_algorithm.upper()} (AUC-ROC: {best_auc:.4f})")
     print("=" * 80)
     
+    logger.info(f"\nBest Model: {best_auc_algorithm.upper()} (AUC-ROC: {best_auc:.4f})")
+    
+    # Save results summary to JSON
+    results_summary['best_model'] = {
+        'algorithm': best_auc_algorithm,
+        'auc_roc': float(best_auc)
+    }
+    
+    json_file = f"reports/evaluation_results_{timestamp}.json"
+    with open(json_file, 'w') as f:
+        json.dump(results_summary, f, indent=2)
+    
     print(f"\nAll models saved in: {models_dir}/")
     print(f"All reports saved in: {reports_dir}/")
+    print(f"Evaluation results saved to: {json_file}")
+    
+    logger.info(f"\nAll models saved in: {models_dir}/")
+    logger.info(f"All reports saved in: {reports_dir}/")
+    logger.info(f"Evaluation results saved to: {json_file}")
     
     print_section_header("WORKFLOW COMPLETED SUCCESSFULLY")
     print(f"Finished at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -326,6 +410,11 @@ def main():
     print("  2. Use the best performing model for production predictions")
     print("  3. Monitor model performance on new data")
     print("  4. Retrain periodically with updated data")
+    
+    logger.info("=" * 80)
+    logger.info("WORKFLOW COMPLETED SUCCESSFULLY")
+    logger.info("=" * 80)
+    logger.info(f"Finished at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
 if __name__ == "__main__":

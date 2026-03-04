@@ -1,0 +1,97 @@
+{
+  "timestamp": "20260304_210625",
+  "dataset": "Data/corona_tested_individuals_ver_006.english.csv",
+  "models": {
+    "logistic_regression": {
+      "model_path": "models/logistic_regression_20260304_210635.joblib",
+      "accuracy": 0.902894456876628,
+      "auc_roc": 0.9180734510084768,
+      "precision_positive": 0.43475,
+      "precision_negative": 0.9834042736145148,
+      "recall_positive": 0.8183529411764706,
+      "recall_negative": 0.9100421739476406,
+      "f1_positive": 0.5678367346938775,
+      "f1_negative": 0.9453020064885417,
+      "confusion_matrix": [
+        [
+          22873,
+          2261
+        ],
+        [
+          386,
+          1739
+        ]
+      ],
+      "class_distribution": {
+        "class_0": 25134,
+        "class_1": 2125
+      },
+      "class_balance_method": "class_weights",
+      "feature_engineering_applied": true,
+      "original_feature_count": 8,
+      "engineered_feature_count": 189
+    },
+    "random_forest": {
+      "model_path": "models/random_forest_20260304_210641.joblib",
+      "accuracy": 0.9028577717451117,
+      "auc_roc": 0.9186872996035367,
+      "precision_positive": 0.4346086521630408,
+      "precision_negative": 0.9833619948409287,
+      "recall_positive": 0.8178823529411765,
+      "recall_negative": 0.9100421739476406,
+      "f1_positive": 0.5676028739386022,
+      "f1_negative": 0.9452824730338472,
+      "confusion_matrix": [
+        [
+          22873,
+          2261
+        ],
+        [
+          387,
+          1738
+        ]
+      ],
+      "class_distribution": {
+        "class_0": 25134,
+        "class_1": 2125
+      },
+      "class_balance_method": "class_weights",
+      "feature_engineering_applied": false,
+      "original_feature_count": 8,
+      "engineered_feature_count": 8
+    },
+    "gradient_boosting": {
+      "model_path": "models/gradient_boosting_20260304_210708.joblib",
+      "accuracy": 0.902894456876628,
+      "auc_roc": 0.9190441164768605,
+      "precision_positive": 0.43475,
+      "precision_negative": 0.9834042736145148,
+      "recall_positive": 0.8183529411764706,
+      "recall_negative": 0.9100421739476406,
+      "f1_positive": 0.5678367346938775,
+      "f1_negative": 0.9453020064885417,
+      "confusion_matrix": [
+        [
+          22873,
+          2261
+        ],
+        [
+          386,
+          1739
+        ]
+      ],
+      "class_distribution": {
+        "class_0": 25134,
+        "class_1": 2125
+      },
+      "class_balance_method": "smote",
+      "feature_engineering_applied": false,
+      "original_feature_count": 8,
+      "engineered_feature_count": 8
+    }
+  },
+  "best_model": {
+    "algorithm": "gradient_boosting",
+    "auc_roc": 0.9190441164768605
+  }
+}

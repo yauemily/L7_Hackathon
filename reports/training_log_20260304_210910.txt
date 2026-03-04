@@ -1,0 +1,63 @@
+2026-03-04 21:09:10,617 - =======================================================  COVID-19 PREDICTION MODE2026-03-04 21:09:10,617 ====================================================2026-03-04 21:09:10,617 - ===Started at: 2026-03-04 21:09:10
+Log file: reports/training_log_20260304_210910.txt
+
+LOGISTIC_REGRESSION - Evaluation Metrics:
+  Accuracy: 0.9029
+  AUC-ROC: 0.9181
+  F1-Score (Positive): 0.5678
+  F1-Score (Negative): 0.9453
+
+RANDOM_FOREST - Evaluation Metrics:
+  Accuracy: 0.9029
+  AUC-ROC: 0.9187
+  F1-Score (Positive): 0.5676
+  F1-Score (Negative): 0.9453
+
+GRADIENT_BOOSTING - Evaluation Metrics:
+  Accuracy: 0.9029
+  AUC-ROC: 0.9190
+  F1-Score (Positive): 0.5678
+  F1-Score (Negative): 0.9453
+
+Best Model: GRADIENT_BOOSTING (AUC-ROC: 0.9190)
+
+All models saved in: models/
+All reports saved in: reports/
+Evaluation results saved to: reports/evaluation_results_20260304_210910.json
+================================================================================
+WORKFLOW COMPLETED SUCCESSFULLY
+================================================================================
+Finished at: 2026-03-04 21:09:47
+3-04 21:09:18,825 -   F1-Score (Negative): 0.9453
+2026-03-04 21:09:22,781 - Extracted feature importance from feature_importances_ attribute
+2026-03-04 21:09:22,783 - Extracted importance for 8 features
+2026-03-04 21:09:22,786 - Saved feature importance report to reports/feature_importance_random_forest.csv
+2026-03-04 21:09:23,327 - Saved feature importance visualization to reports/feature_importance_random_forest.png
+2026-03-04 21:09:23,327 - Created feature importance visualization for top 8 features
+2026-03-04 21:09:23,393 - 
+RANDOM_FOREST - Evaluation Metrics:
+2026-03-04 21:09:23,393 -   Accuracy: 0.9029
+2026-03-04 21:09:23,393 -   AUC-ROC: 0.9187
+2026-03-04 21:09:23,394 -   F1-Score (Positive): 0.5676
+2026-03-04 21:09:23,394 -   F1-Score (Negative): 0.9453
+2026-03-04 21:09:46,901 - Extracted feature importance from feature_importances_ attribute
+2026-03-04 21:09:46,902 - Extracted importance for 8 features
+2026-03-04 21:09:46,904 - Saved feature importance report to reports/feature_importance_gradient_boosting.csv
+2026-03-04 21:09:47,451 - Saved feature importance visualization to reports/feature_importance_gradient_boosting.png
+2026-03-04 21:09:47,452 - Created feature importance visualization for top 8 features
+2026-03-04 21:09:47,458 - 
+GRADIENT_BOOSTING - Evaluation Metrics:
+2026-03-04 21:09:47,459 -   Accuracy: 0.9029
+2026-03-04 21:09:47,459 -   AUC-ROC: 0.9190
+2026-03-04 21:09:47,459 -   F1-Score (Positive): 0.5678
+2026-03-04 21:09:47,459 -   F1-Score (Negative): 0.9453
+2026-03-04 21:09:47,698 - 
+Best Model: GRADIENT_BOOSTING (AUC-ROC: 0.9190)
+2026-03-04 21:09:47,699 - 
+All models saved in: models/
+2026-03-04 21:09:47,700 - All reports saved in: reports/
+2026-03-04 21:09:47,700 - Evaluation results saved to: reports/evaluation_results_20260304_210910.json
+2026-03-04 21:09:47,700 - ================================================================================
+2026-03-04 21:09:47,700 - WORKFLOW COMPLETED SUCCESSFULLY
+2026-03-04 21:09:47,700 - ================================================================================
+2026-03-04 21:09:47,700 - Finished at: 2026-03-04 21:09:47
