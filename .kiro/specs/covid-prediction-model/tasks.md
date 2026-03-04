@@ -144,7 +144,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 7.1, 7.2, 7.3, 7.5_
 
 - [ ] 8. Implement model evaluator
-  - [-] 8.1 Create `evaluation.py` with `ModelEvaluator` class
+  - [x] 8.1 Create `evaluation.py` with `ModelEvaluator` class
     - Implement `compute_metrics()` to calculate accuracy, precision, recall, F1-score, AUC-ROC
     - Implement `generate_confusion_matrix()` using sklearn.metrics.confusion_matrix
     - Implement `evaluate()` to orchestrate evaluation and return complete report
@@ -163,7 +163,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
 - [ ] 9. Implement feature importance analyzer
-  - [ ] 9.1 Create `feature_importance.py` with `FeatureImportanceAnalyzer` class
+  - [x] 9.1 Create `feature_importance.py` with `FeatureImportanceAnalyzer` class
     - Implement `extract_importance()` to get feature importance from model
     - Support both feature_importances_ (tree models) and coef_ (linear models)
     - Rank features by importance in descending order
@@ -185,11 +185,11 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - Test graceful handling of unsupported models
     - _Requirements: 9.1, 9.2, 9.3, 9.5_
 
-- [ ] 10. Checkpoint - Ensure training and evaluation pipeline works
+- [x] 10. Checkpoint - Ensure training and evaluation pipeline works
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 11. Implement prediction service
-  - [ ] 11.1 Create `prediction.py` with `PredictionService` class
+  - [x] 11.1 Create `prediction.py` with `PredictionService` class
     - Implement `__init__()` to load model and feature engineer from file
     - Implement `validate_features()` to check all required features present and valid
     - Validate symptom values are 0 or 1
@@ -224,7 +224,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 5.1, 5.2, 5.5, 6.1, 6.2, 6.3, 6.4, 6.5_
 
 - [ ] 12. Create data models and schemas
-  - [ ] 12.1 Create `models.py` with dataclass definitions
+  - [-] 12.1 Create `models.py` with dataclass definitions
     - Define `FeatureVector` dataclass with all input features
     - Define `PredictionResult` dataclass with predicted_class, confidence, timestamp
     - Define `TrainingMetadata` dataclass with all training metadata fields
