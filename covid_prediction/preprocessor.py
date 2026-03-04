@@ -33,14 +33,27 @@ class CovidDataPreprocessor:
             DataFrame with missing values handled
         """
         if strategy == 'drop':
-            # Drop rows with missing values in age_60_and_above
-            df_clean = df.dropna(subset=['age_60_and_above'])
+            # Drop rows with any missing values in critical columns
+            critical_columns = ['age_60_and_above', 'gender', 'cough', 'fever', 
+                              'sore_throat', 'shortness_of_breath', 'head_ache']
+            df_clean = df.dropna(subset=critical_columns)
             return df_clean
         elif strategy == 'impute':
             # Impute missing values with mode (most common value)
             if 'age_60_and_above' in df.columns:
                 mode_value = df['age_60_and_above'].mode()[0] if not df['age_60_and_above'].mode().empty else 'No'
                 df['age_60_and_above'] = df['age_60_and_above'].fillna(mode_value)
+            
+            if 'gender' in df.columns:
+                mode_value = df['gender'].mode()[0] if not df['gender'].mode().empty else 'male'
+                df['gender'] = df['gender'].fillna(mode_value)
+            
+            # Impute symptom columns with 0 (no symptom)
+            symptom_columns = ['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache']
+            for col in symptom_columns:
+                if col in df.columns:
+                    df[col] = df[col].fillna(0)
+            
             return df
         else:
             raise ValueError(f"Unknown strategy: {strategy}. Use 'drop' or 'impute'.")

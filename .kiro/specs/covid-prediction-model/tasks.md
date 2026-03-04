@@ -56,7 +56,7 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - _Requirements: 2.1, 2.2, 2.5_
 
 - [ ] 4. Implement feature engineering
-  - [-] 4.1 Create `feature_engineering.py` with `FeatureEngineer` class
+  - [x] 4.1 Create `feature_engineering.py` with `FeatureEngineer` class
     - Implement `__init__()` to accept algorithm parameter
     - Implement `create_interaction_features()` for symptom co-occurrence patterns
     - Implement `create_polynomial_features()` using sklearn.preprocessing.PolynomialFeatures
@@ -84,11 +84,11 @@ This implementation plan breaks down the COVID-19 prediction model into discrete
     - Test RuntimeError when transform called before fit_transform
     - _Requirements: 2.2, 2.4_
 
-- [ ] 5. Checkpoint - Ensure data pipeline works end-to-end
+- [x] 5. Checkpoint - Ensure data pipeline works end-to-end
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement training pipeline
-  - [ ] 6.1 Create `training.py` with `TrainingPipeline` class
+  - [-] 6.1 Create `training.py` with `TrainingPipeline` class
     - Implement `compute_class_weights()` to calculate weights for imbalanced classes
     - Implement `train()` method supporting logistic regression, random forest, and gradient boosting
     - Apply class balancing using class_weight parameter or SMOTE
